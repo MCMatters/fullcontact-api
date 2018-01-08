@@ -54,7 +54,7 @@ class CompanyResource extends AbstractResource
         }
 
         return $this->requestGet(
-            'search.json',
+            'company/search.json',
             array_replace(
                 $locationFilters,
                 ['sort' => $sort, 'companyName' => $company]
