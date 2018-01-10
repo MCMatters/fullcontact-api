@@ -19,7 +19,7 @@ class CompanyTest extends TestCase
      * @throws \McMatters\FullContactApi\Exceptions\FullContactException
      * @throws \PHPUnit\Framework\Exception
      */
-    public function testLookupByDomain(): void
+    public function testLookupByDomain()
     {
         $result = $this->client->company()->lookupByDomain('amgrade.com');
 
@@ -35,7 +35,7 @@ class CompanyTest extends TestCase
      * @throws \PHPUnit\Framework\AssertionFailedError
      * @throws \PHPUnit\Framework\Exception
      */
-    public function testLookupByCompanyName(): void
+    public function testLookupByCompanyName()
     {
         $result = $this->client->company()->lookupByCompanyName('AMgrade');
 
@@ -55,7 +55,7 @@ class CompanyTest extends TestCase
      * @throws \McMatters\FullContactApi\Exceptions\FullContactException
      * @throws \PHPUnit\Framework\Exception
      */
-    public function testLookupByCompanyNameWithException(): void
+    public function testLookupByCompanyNameWithException()
     {
         $this->expectException(InvalidArgumentException::class);
 
