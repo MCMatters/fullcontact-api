@@ -11,9 +11,18 @@
         "php": ">=7.0",
         "guzzlehttp/guzzle": "^6.3"
     },
+    "require-dev": {
+        "codeclimate/php-test-reporter": "^0.4.4",
+        "phpunit/phpunit": "^6.5"
+    },
     "autoload": {
         "psr-4": {
             "McMatters\\FullContactApi\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "McMatters\\FullContactApi\\Tests\\": "tests"
         }
     },
     "config": {

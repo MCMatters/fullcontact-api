@@ -7,7 +7,7 @@ namespace McMatters\FullContactApi\Resources;
 use InvalidArgumentException;
 use McMatters\FullContactApi\Exceptions\FullContactException;
 use const false, true;
-use function array_replace, in_array;
+use function array_replace, in_array, urlencode;
 
 /**
  * Class CompanyResource
@@ -57,7 +57,7 @@ class CompanyResource extends AbstractResource
             'company/search.json',
             array_replace(
                 $locationFilters,
-                ['sort' => $sort, 'companyName' => $company]
+                ['sort' => $sort, 'companyName' => urlencode($company)]
             )
         );
     }
