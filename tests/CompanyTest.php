@@ -5,8 +5,6 @@ declare(strict_types = 1);
 namespace McMatters\FullContactApi\Tests;
 
 use InvalidArgumentException;
-use const true;
-use function in_array, is_array;
 
 /**
  * Class CompanyTest
@@ -16,7 +14,6 @@ use function in_array, is_array;
 class CompanyTest extends TestCase
 {
     /**
-     * @throws \McMatters\FullContactApi\Exceptions\FullContactException
      * @throws \PHPUnit\Framework\Exception
      */
     public function testLookupByDomain()
@@ -31,7 +28,6 @@ class CompanyTest extends TestCase
 
     /**
      * @throws InvalidArgumentException
-     * @throws \McMatters\FullContactApi\Exceptions\FullContactException
      * @throws \PHPUnit\Framework\AssertionFailedError
      * @throws \PHPUnit\Framework\Exception
      */
@@ -39,26 +35,13 @@ class CompanyTest extends TestCase
     {
         $result = $this->client->company()->lookupByCompanyName('AMgrade');
 
-        $this->assertTrue(is_array($result));
         $this->assertCount(2, $result);
 
         $domains = ['amgrade.de', 'amgrade.com'];
 
         foreach ($result as $item) {
             $this->assertArrayHasKey('lookupDomain', $item);
-            $this->assertTrue(in_array($item['lookupDomain'], $domains, true));
+            $this->assertContains($item['lookupDomain'], $domains);
         }
-    }
-
-    /**
-     * @throws InvalidArgumentException
-     * @throws \McMatters\FullContactApi\Exceptions\FullContactException
-     * @throws \PHPUnit\Framework\Exception
-     */
-    public function testLookupByCompanyNameWithException()
-    {
-        $this->expectException(InvalidArgumentException::class);
-
-        $this->client->company()->lookupByCompanyName('AMgrade', 'foobar');
     }
 }

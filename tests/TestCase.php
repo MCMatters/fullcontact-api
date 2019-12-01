@@ -6,6 +6,7 @@ namespace McMatters\FullContactApi\Tests;
 
 use McMatters\FullContactApi\FullContactClient;
 use PHPUnit\Framework\TestCase as BaseTestCase;
+
 use function getenv;
 
 /**
@@ -16,7 +17,7 @@ use function getenv;
 abstract class TestCase extends BaseTestCase
 {
     /**
-     * @var FullContactClient
+     * @var \McMatters\FullContactApi\FullContactClient
      */
     protected $client;
 

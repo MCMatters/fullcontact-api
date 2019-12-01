@@ -35,7 +35,7 @@ class FullContactClient
     }
 
     /**
-     * @return CompanyResource
+     * @return \McMatters\FullContactApi\Resources\CompanyResource
      */
     public function company(): CompanyResource
     {
@@ -43,7 +43,7 @@ class FullContactClient
     }
 
     /**
-     * @return PersonResource
+     * @return \McMatters\FullContactApi\Resources\PersonResource
      */
     public function person(): PersonResource
     {

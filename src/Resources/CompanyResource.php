@@ -4,10 +4,9 @@ declare(strict_types = 1);
 
 namespace McMatters\FullContactApi\Resources;
 
-use InvalidArgumentException;
-use McMatters\FullContactApi\Exceptions\FullContactException;
-use const false, true;
-use function array_replace, in_array, urlencode;
+use function urlencode;
+
+use const false;
 
 /**
  * Class CompanyResource
@@ -21,16 +20,15 @@ class CompanyResource extends AbstractResource
      * @param bool $keyPeople
      *
      * @return array
-     * @throws FullContactException
      */
     public function lookupByDomain(
         string $domain,
         bool $keyPeople = false
     ): array {
-        return $this->requestGet(
-            'company/lookup.json',
-            ['domain' => $domain, 'keyPeople' => $keyPeople]
-        );
+        return $this->httpClient
+            ->withQuery(['domain' => $domain, 'keyPeople' => $keyPeople])
+            ->get('company/lookup.json')
+            ->json();
     }
 
     /**
@@ -39,26 +37,17 @@ class CompanyResource extends AbstractResource
      * @param array $locationFilters
      *
      * @return array
-     * @throws InvalidArgumentException
-     * @throws FullContactException
      */
     public function lookupByCompanyName(
         string $company,
         string $sort = 'traffic',
         array $locationFilters = []
     ): array {
-        if (!in_array($sort, ['traffic', 'relevance', 'employees'], true)) {
-            throw new InvalidArgumentException(
-                '$sort must be "traffic", "relevance" or "employees"'
-            );
-        }
-
-        return $this->requestGet(
-            'company/search.json',
-            array_replace(
-                $locationFilters,
-                ['sort' => $sort, 'companyName' => urlencode($company)]
+        return $this->httpClient
+            ->withQuery(
+                ['sort' => $sort, 'companyName' => urlencode($company)] + $locationFilters
             )
-        );
+            ->get('company/search.json')
+            ->json();
     }
 }
